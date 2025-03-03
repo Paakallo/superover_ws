@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'test_package'
+package_name = 'vision'
 
 setup(
     name=package_name,
