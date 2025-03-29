@@ -53,7 +53,7 @@
 #include <geometry_msgs/msg/vector3.hpp>
 #include <sensor_msgs/msg/imu.hpp>
 
-namespace enu_ned
+namespace ned_enu
 {
 namespace frame_transforms
 {

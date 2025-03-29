@@ -1,5 +1,5 @@
 #include <rclcpp/rclcpp.hpp>
-#include <odom_conversion/frame_transforms.h>
+#include <frame_transforms.h>
 // #include <node.hpp>
 #include <px4_msgs/msg/vehicle_odometry.hpp>
 #include <nav_msgs/msg/odometry.hpp>
@@ -39,19 +39,14 @@ private:
     publish_data.header.stamp.sec = msg->timestamp;
     publish_data.header.stamp.nanosec = 0; //this is temporar
 
-
-
-
-    printf("\n cos tam JESZCZE NIC NIE POWINNO BYC");
-
-    Eigen::Quaterniond q = odom_conversion::frame_transforms::utils::quaternion::array_to_eigen_quat(msg->q);
-    Eigen::Quaterniond enu_q = odom_conversion::frame_transforms::ned_to_enu_orientation(q);
+    Eigen::Quaterniond q = ned_enu::frame_transforms::utils::quaternion::array_to_eigen_quat(msg->q);
+    Eigen::Quaterniond enu_q = ned_enu::frame_transforms::ned_to_enu_orientation(q);
 //assumption: 0==x,1==y,2==z
     Eigen::Vector3d position = Eigen::Vector3d(msg->position[0], msg->position[1], msg->position[2]);
-    Eigen::Vector3d enu_position = odom_conversion::frame_transforms::ned_to_enu_local_frame(position);
+    Eigen::Vector3d enu_position = ned_enu::frame_transforms::ned_to_enu_local_frame(position);
 //same assumption
     Eigen::Vector3d velocity = Eigen::Vector3d(msg->velocity[0], msg->velocity[1], msg->velocity[2]);
-    Eigen::Vector3d enu_velocity = odom_conversion::frame_transforms::ned_to_enu_local_frame(velocity);
+    Eigen::Vector3d enu_velocity = ned_enu::frame_transforms::ned_to_enu_local_frame(velocity);
 
     publish_data.pose.pose.position.x = enu_position.x();
     publish_data.pose.pose.position.y = enu_position.y();
@@ -71,7 +66,6 @@ private:
     publish_data.twist.twist.angular.y = -msg->angular_velocity[1];
     publish_data.twist.twist.angular.z = -msg->angular_velocity[2];
     
-    printf("\n cos tam powinno byc blagam PUBLIKUJ");
     publisher_->publish(publish_data);
   }
 

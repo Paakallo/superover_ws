@@ -49,7 +49,7 @@ target_include_directories(frame_transforms PUBLIC
 
 add_library(lib_odom src/odom_conversion.cpp)
 ament_target_dependencies(lib_odom ${LIB_DEPEN})
-include_directories(include/odom_conversion)
+include_directories(include/${PROJECT_NAME})
 
 
 add_executable(odom_conversion ${SRC_CPP} src/frame_transforms.cpp)
@@ -58,8 +58,8 @@ ament_target_dependencies(odom_conversion ${LIB_DEPEN})
 target_link_libraries(odom_conversion lib_odom frame_transforms)
 target_include_directories(odom_conversion
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/odom_conversion>
-    $<INSTALL_INTERFACE:include/odom_conversion>)
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}>
+    $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
 
 
 
@@ -71,7 +71,7 @@ install(TARGETS
     frame_transforms
     lib_odom
     DESTINATION lib/${PROJECT_NAME})
-ament_package()
+# ament_package()
 
 
 
