@@ -13,7 +13,7 @@ find_package(ament_cmake REQUIRED)
 
 # includes directories in order to find below packages
 INCLUDE_DIRECTORIES ("/usr/include/eigen3")
-INCLUDE_DIRECTORIES ("~/sese_ws/build/px4_msgs/rosidl_generator_cpp")
+INCLUDE_DIRECTORIES ("~/superover_ws/build/px4_msgs/rosidl_generator_cpp")
 include_directories(include)
 
 # find dependecies of executable
