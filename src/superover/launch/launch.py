@@ -7,9 +7,9 @@ from launch_ros.substitutions import FindPackageShare
 import os
 
 def generate_launch_description():
-    pkg_share = FindPackageShare(package='vehicle').find('vehicle')
-    default_model_path = os.path.join(pkg_share, 'vehicle', 'robot.urdf')
-    default_rviz_config_path = os.path.join(pkg_share, 'vehicle', 'config.rviz')
+    pkg_share = FindPackageShare(package='superover').find('superover')
+    default_model_path = os.path.join(pkg_share, 'src','description', 'robot.urdf')
+    default_rviz_config_path = os.path.join(pkg_share, 'rviz', 'config.rviz')
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
