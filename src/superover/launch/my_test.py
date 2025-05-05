@@ -31,6 +31,14 @@ def generate_launch_description():
         name='map_to_odom_broadcaster',
         arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom'] 
     )
+    # map -> odom -> base_link transform
+    robot_localization_node = Node(
+    package='robot_localization',
+    executable='ekf_node',
+    name='ekf_node',
+    output='screen',
+    parameters=[os.path.join(pkg_share, 'config/ekf.yaml')]
+    )
 
     rviz_node = Node(
         package='rviz2',
@@ -47,6 +55,7 @@ def generate_launch_description():
         joint_state_publisher_node,
         # joint_state_publisher_gui_node,
         robot_state_publisher_node,
-        map2odom,
+        # map2odom,
+        robot_localization_node,
         rviz_node,
     ])

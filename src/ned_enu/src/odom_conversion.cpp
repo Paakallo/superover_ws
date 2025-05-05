@@ -35,6 +35,8 @@ private:
   {
     nav_msgs::msg::Odometry publish_data;
 
+    publish_data.header.frame_id = "odom";
+    publish_data.child_frame_id = "base_link";
 //this segment is nonsensical, please ignore it
     publish_data.header.stamp.sec = msg->timestamp;
     publish_data.header.stamp.nanosec = 0; //this is temporar
